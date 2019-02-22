@@ -1,0 +1,33 @@
+{
+  "name": "@open-scanner-serial/serial-communication",
+  "version": "1.0.0",
+  "description": "Testing playground for serial communication between node and radio scanners",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "nodemon --ext ts --exec ts-node ./src/index.ts",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Open-Scanner-Serial/Serial-Communication.git"
+  },
+  "author": "[Aaron J. Shapiro <shapia4@rpi.edu>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Open-Scanner-Serial/Serial-Communication/issues"
+  },
+  "homepage": "https://github.com/Open-Scanner-Serial/Serial-Communication#readme",
+  "devDependencies": {
+    "@types/jest": "^24.0.6",
+    "@types/node": "^11.9.4",
+    "@types/serialport": "^7.0.1",
+    "jest": "^24.1.0",
+    "nodemon": "^1.18.10",
+    "ts-jest": "^24.0.0",
+    "ts-node": "^8.0.2",
+    "typescript": "^3.3.3333"
+  },
+  "dependencies": {
+    "serialport": "^7.1.4"
+  }
+}
