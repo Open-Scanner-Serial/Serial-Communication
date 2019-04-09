@@ -11,7 +11,7 @@ export class GetModelInfoResponse extends UnidenResponse {
     if (this.rawValues.length < 3) return false;
 
     const rawModel = this.rawValues[2];
-    return Object.values(UnidenModel).includes(rawModel);
+    return Object.values(UnidenModel).includes(rawModel.trimRight());
   }
 
   public getModel(): UnidenModel {

@@ -1,5 +1,5 @@
-import { UnidenCommand } from "./UnidenCommand";
-import { UnidenCommandType } from "../../events/UnidenCommandType";
+import { UnidenCommand } from "../UnidenCommand";
+import { UnidenCommandType } from "../UnidenCommandType";
 
 export class GetModelInfoCommand extends UnidenCommand {
 

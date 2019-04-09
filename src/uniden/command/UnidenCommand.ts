@@ -1,4 +1,4 @@
-import { UnidenCommandType } from "../../events/UnidenCommandType";
+import { UnidenCommandType } from "./UnidenCommandType";
 
 export abstract class UnidenCommand {
 
@@ -11,7 +11,7 @@ export abstract class UnidenCommand {
   protected abstract getPayloadString(): string;
 
   public toString(): string {
-    return `${this.type}`;
+    return `${this.type}\r`;
   }
 
 }

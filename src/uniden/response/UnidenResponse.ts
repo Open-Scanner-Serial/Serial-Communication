@@ -1,4 +1,4 @@
-import { UnidenCommandType } from "../../events/UnidenCommandType";
+import { UnidenCommandType } from "../command/UnidenCommandType";
 
 export abstract class UnidenResponse {
 

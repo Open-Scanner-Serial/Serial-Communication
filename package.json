@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "dev": "nodemon --ext ts --exec ts-node ./src/index.ts",
+    "dev-ins": "nodemon --ext ts --exec ts-node --inspect ./src/index.ts",
     "test": "jest"
   },
   "repository": {

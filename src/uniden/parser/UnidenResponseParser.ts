@@ -1,7 +1,7 @@
 import { UnidenResponse } from "../response/UnidenResponse";
-import { UnidenCommandUtilities } from "../utilties/UnidenCommandUtilities";
+import { UnidenCommandUtilities } from "../utilities/UnidenCommandUtilities";
+import { UnidenCommandType } from "../command/UnidenCommandType";
 import { UnidenResponseRegistry } from "../response/UnidenResponseRegistry";
-import { UnidenCommandType } from "../../events/UnidenCommandType";
 
 const ResponseRegex = /([^,;]+),([^,;]+)(,(.+))?/;
 
