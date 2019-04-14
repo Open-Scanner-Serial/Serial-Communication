@@ -1,6 +1,6 @@
 import { UnidenResponse } from "./UnidenResponse";
 
-export class GetFirmwareVersionResponse extends UnidenResponse {
+export class GetUserRecordControlResponse extends UnidenResponse {
 
   public isValid(): boolean {
     if (this.rawValues.length < 3) return false;

@@ -3,6 +3,7 @@ import { UnidenResponse } from "./UnidenResponse";
 export enum UnidenModel {
   BCD436HP = "BCD436HP",
   BCD536HP = "BCD536HP",
+  BR330T = "BR330T"
 }
 
 export class GetModelInfoResponse extends UnidenResponse {
