@@ -8,10 +8,11 @@ export abstract class UnidenCommand {
     this.type = type;
   }
 
-  protected abstract getPayloadString(): string;
+  protected abstract getPayloadString(): string | null;
 
   public toString(): string {
-    return `${this.type}\r`;
+    const payload = this.getPayloadString();
+    return `${this.type}${payload ? `,${payload}` : ""}\r`;
   }
 
 }

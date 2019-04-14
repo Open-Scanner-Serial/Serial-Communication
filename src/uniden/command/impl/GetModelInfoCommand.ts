@@ -7,8 +7,8 @@ export class GetModelInfoCommand extends UnidenCommand {
     super(UnidenCommandType.GetModelInfo);
   }
 
-  protected getPayloadString(): string {
-    return "";
+  protected getPayloadString(): string | null {
+    return null;
   }
 
 }

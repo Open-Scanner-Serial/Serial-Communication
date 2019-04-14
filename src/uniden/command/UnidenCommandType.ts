@@ -21,7 +21,7 @@ export enum UnidenCommandType {
   // GetSetLocationAndRange = "LCR",
   // AnalyzeStart = "AST",
   // AnalyzePauseResume = "APR",
-  // UserRecordControl = "URC",
+  UserRecordControl = "URC",
   // MenuMode = "MNU",
   // MenuStatusInfo ="MSI",
   // MenuSetValue = "MSV",
