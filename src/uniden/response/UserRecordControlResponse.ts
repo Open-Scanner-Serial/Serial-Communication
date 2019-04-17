@@ -9,21 +9,36 @@ export enum UserRecordControlResponseError {
   FileAccessError = "0001",
   LowBattery = "0002",
   SessionOverLimit = "0003",
-  RTCLost = "0004"
 }
 
 export class UserRecordControlResponse extends UnidenResponse {
 
+  private _success?: boolean;
+  private _error?: UserRecordControlResponseError;
+
   public isValid(): boolean {
-    return false;
+    if (this.rawValues.length < 3) return false;
+    if (this.rawValues[2] === "OK") {
+      this._success = true;
+      return true;
+    }
+    else if (this.rawValues[2] === "ERR") {
+      this._success = false;
+      if (!Object.values(UserRecordControlResponseError).includes(this.rawValues[4])) return false;
+      this._error = this.rawValues[4] as UserRecordControlResponseError;
+      return true;
+    }
+    else {
+      return false;
+    }
   }
 
   public get success(): boolean {
-    return false;
+    return this._success || false;
   }
 
   public get error(): UserRecordControlResponseError | null {
-    return null;
+    return this._error || null;
   }
 
 

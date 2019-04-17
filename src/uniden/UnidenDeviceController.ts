@@ -40,8 +40,8 @@ export class UnidenDeviceController extends EventEmitter {
     });
   }
 
-  public async issueCommand(command: UnidenCommand): Promise<UnidenResponse> {
-    return new Promise<UnidenResponse>(((resolve, reject) => {
+  public async issueCommand<R extends UnidenResponse>(command: UnidenCommand): Promise<R> {
+    return new Promise<R>(((resolve, reject) => {
       if (!this.connection.isOpen) reject("Cannot issue command: connection not open");
 
       this.connection.write(command.toString(), error => { if (error) reject(error) });
@@ -49,7 +49,7 @@ export class UnidenDeviceController extends EventEmitter {
       this.on(InternalEvent.DataTerminator, () => {
         const response = this.currentOutput;
         this.currentOutput = "";
-        resolve(UnidenResponseParser.parse(response));
+        resolve(UnidenResponseParser.parse(response) as R);
       });
 
     }));

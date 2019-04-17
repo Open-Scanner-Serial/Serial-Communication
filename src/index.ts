@@ -1,7 +1,7 @@
 import { ConnectionUtils } from "./uniden/utilities/ConnectionUtilities";
 import { UnidenDeviceController } from "./uniden/UnidenDeviceController";
-import { GetModelInfoCommand } from "./uniden/command/impl/GetModelInfoCommand";
-import { GetModelInfoResponse } from "./uniden/response/GetModelInfoResponse";
+import { UserRecordControlCommand, UserRecordControlStatus } from "./uniden/command/impl/UserRecordControlCommand";
+import { UserRecordControlResponse } from "./uniden/response/UserRecordControlResponse";
 
 (async () => {
   try {
@@ -9,10 +9,16 @@ import { GetModelInfoResponse } from "./uniden/response/GetModelInfoResponse";
     const controller = new UnidenDeviceController(portInfo);
     await controller.connect();
     controller.listen();
-    console.log("connected");
 
-    const response = await controller.issueCommand(new GetModelInfoCommand()) as GetModelInfoResponse;
-    console.log(response.getModel());
+    const command = new UserRecordControlCommand(UserRecordControlStatus.Start);
+    const response = await controller.issueCommand<UserRecordControlResponse>(command);
+    if (response.success) {
+      console.log("Recording started!");
+    }
+    else {
+      console.error("Recording could not be started");
+      console.error(response.error);
+    }
 
     await controller.disconnect();
     console.log("disconnected");
