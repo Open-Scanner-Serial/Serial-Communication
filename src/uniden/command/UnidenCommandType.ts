@@ -25,5 +25,7 @@ export enum UnidenCommandType {
   // MenuMode = "MNU",
   // MenuStatusInfo ="MSI",
   // MenuSetValue = "MSV",
-  // MenuStructureBack = "MSB"
+  // MenuStructureBack = "MSB",
+  EnterProgramMode = "PRG",
+  ExitProgramMode = "ERG",
 }

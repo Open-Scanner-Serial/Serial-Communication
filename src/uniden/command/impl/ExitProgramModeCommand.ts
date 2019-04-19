@@ -1,10 +1,10 @@
 import { UnidenCommand } from "../UnidenCommand";
 import { UnidenCommandType } from "../UnidenCommandType";
 
-export class GetFirmwareVersionCommand extends UnidenCommand {
+export class ExitProgramModeCommand extends UnidenCommand {
 
   constructor() {
-    super(UnidenCommandType.GetFirmwareVersion);
+    super(UnidenCommandType.ExitProgramMode);
   }
 
   protected getPayloadString(): string | null {

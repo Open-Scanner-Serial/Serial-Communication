@@ -10,7 +10,4 @@ export class GetFirmwareVersionResponse extends UnidenResponse {
   public getVersion() {
     return this.rawValues[2].trimRight();
   }
-
-
-
 }
