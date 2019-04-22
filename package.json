@@ -29,6 +29,7 @@
     "typescript": "^3.4.3"
   },
   "dependencies": {
-    "serialport": "^7.1.4"
+    "serialport": "^7.1.4",
+    "xml-js": "^1.6.11"
   }
 }

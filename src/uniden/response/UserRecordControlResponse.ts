@@ -17,14 +17,18 @@ export class UserRecordControlResponse extends UnidenResponse {
   private _error?: UserRecordControlResponseError;
 
   public isValid(): boolean {
-    if (this.rawValues.length < 3) return false;
-    if (this.rawValues[2] === "OK") {
+    if (this.rawValues.length < 3) {
+      return false;
+    }
+    else if (this.rawValues[2].trimRight() === "OK") {
       this._success = true;
       return true;
     }
-    else if (this.rawValues[2] === "ERR") {
+    else if (this.rawValues[2].trimRight() === "ERR") {
       this._success = false;
-      if (!Object.values(UserRecordControlResponseError).includes(this.rawValues[4])) return false;
+      if (!Object.values(UserRecordControlResponseError).includes(this.rawValues[4])) {
+        return false;
+      }
       this._error = this.rawValues[4] as UserRecordControlResponseError;
       return true;
     }

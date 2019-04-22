@@ -46,7 +46,8 @@ export class UnidenDeviceController extends EventEmitter {
 
       this.connection.write(command.toString(), error => { if (error) reject(error) });
 
-      this.on(InternalEvent.DataTerminator, () => {
+      this.once(InternalEvent.DataTerminator, () => {
+        console.log("called");
         const response = this.currentOutput;
         this.currentOutput = "";
         resolve(UnidenResponseParser.parse(response) as R);

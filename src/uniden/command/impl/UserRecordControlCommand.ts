@@ -19,7 +19,7 @@ export class UserRecordControlCommand extends UnidenCommand {
     switch (this.status) {
       case UserRecordControlStatus.Start:
       case UserRecordControlStatus.Stop:
-        return `${status}`;
+        return `${this.status}`;
       default:
         return null;
     }

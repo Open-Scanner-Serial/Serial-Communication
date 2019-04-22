@@ -1,7 +1,7 @@
 import { ConnectionUtils } from "./uniden/utilities/ConnectionUtilities";
 import { UnidenDeviceController } from "./uniden/UnidenDeviceController";
-import { UserRecordControlCommand, UserRecordControlStatus } from "./uniden/command/impl/UserRecordControlCommand";
-import { UserRecordControlResponse } from "./uniden/response/UserRecordControlResponse";
+import { GetScannerInfoCommand } from "./uniden/command/impl/GetScannerInfoCommand";
+import {GetScannerInfoResponse} from "./uniden/response/GetScannerInfoResponse";
 
 (async () => {
   try {
@@ -10,18 +10,26 @@ import { UserRecordControlResponse } from "./uniden/response/UserRecordControlRe
     await controller.connect();
     controller.listen();
 
-    const command = new UserRecordControlCommand(UserRecordControlStatus.Start);
-    const response = await controller.issueCommand<UserRecordControlResponse>(command);
-    if (response.success) {
-      console.log("Recording started!");
-    }
-    else {
-      console.error("Recording could not be started");
-      console.error(response.error);
-    }
-
-    await controller.disconnect();
-    console.log("disconnected");
+    const command = new GetScannerInfoCommand();
+    const response = await controller.issueCommand<GetScannerInfoResponse>(command);
+    console.log(response);
+    // if (response.success) {
+    //   console.log("Recording started!");
+    // }
+    // else {
+    //   console.error("Recording could not be started");
+    //   console.error(response.error);
+    // }
+    //
+    // setTimeout(async () => {
+    //   const command2 = new UserRecordControlCommand(UserRecordControlStatus.Stop);
+    //   const response2 = await controller.issueCommand<UserRecordControlResponse>(command2);
+    //   console.log(response2.success ? "Stopped" : "Could not stop");
+    //
+    //   await controller.disconnect();
+    //   console.log("disconnected");
+    // },5000);
+    //
 
   }
   catch(error) {
