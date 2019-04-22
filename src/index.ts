@@ -35,12 +35,9 @@ export class WhistlerDevice {
     private port: SerialPort;
 
     constructor(_port: string, _baudrate: number, debug: boolean) {
-        if (!debug) {
-
             this.port = new SerialPort(_port, {
                 baudRate: _baudrate
             });
-        }
     }
 
     private add(sum: number, num: number) {
@@ -130,6 +127,5 @@ export class WhistlerDevice {
 
 var device = new WhistlerDevice('COM7', 15200, true);
 
-console.log(device.charToByte(['K']));
 
 
