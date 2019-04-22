@@ -67,11 +67,12 @@ export class WhistlerDevice {
     }
 
     private async readMessage() {
-      await this.port.on('readable', () => {
-        return this.port.read();
-      });
-
+        await this.port.on('readable', () => {
+            return this.port.read();
+        });
     }
+
+
 
     /**public charToByte(command: string[]) {
         var bytes = new Uint8Array(command.length);
@@ -80,6 +81,44 @@ export class WhistlerDevice {
         }
         return bytes
     }**/
+
+    public getCCDumpMessage(content: string) {
+        let contentList = content.split(":");
+        let type = contentList[0];
+        switch(type) {
+            case "P25":
+                let system = contentList[1].substr(1, contentList[1].length);
+                let siteID = contentList[2].substr(1, contentList[2].length);
+                let controlChannel = contentList[3].substr(2, contentList[3].length);
+                let subType = contentList[4];
+                if (subType == "P25TSBK" || subType == "P25ES" || subType == "P25LC"
+                    || subType == "LCTG" || subType == "P25HDU") {
+                        let ccData = contentList[5].split(" ");
+                } else if (subType == "P25PDU") {
+                    let ccData = contentList[5].split(":");
+                }
+                break;
+            case "MOT":
+                subType = contentList[4];
+                let ccData = contentList[5];
+                break;
+            case "LTR":
+                ccData = contentList[4];
+                break;
+            case "ED":
+                ccData = contentList[4];
+                break;
+            case "WXS":
+                subType = contentList[1];
+                let channel = contentList[2].substr(1, contentList[2].length);
+                ccData = contentList[3];
+                break;
+            case "WXT":
+                ccData = contentList[2];
+                break;
+
+        }
+    }
 
     public sendKey(button: key) {
 
@@ -122,6 +161,10 @@ export class WhistlerDevice {
         this.setCCDump(0);
     }
 
+    public readCCDump() {
+        var message = this.readMessage().toString();
+        return this.getCCDumpMessage(message);
+    }
 
 }
 
