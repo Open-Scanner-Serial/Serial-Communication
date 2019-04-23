@@ -11,8 +11,11 @@ import {GetScannerInfoResponse} from "./uniden/response/GetScannerInfoResponse";
     controller.listen();
 
     const command = new GetScannerInfoCommand();
-    const response = await controller.issueCommand<GetScannerInfoResponse>(command);
-    console.log(response);
+    setInterval(async () => {
+      const response = await controller.issueCommand<GetScannerInfoResponse>(command);
+      console.dir(response.info.ScannerInfo);
+    }, 1000);
+
     // if (response.success) {
     //   console.log("Recording started!");
     // }
@@ -33,7 +36,6 @@ import {GetScannerInfoResponse} from "./uniden/response/GetScannerInfoResponse";
 
   }
   catch(error) {
-    console.error(error);
-    process.exit(1);
+    // console.error(error);
   }
 })();

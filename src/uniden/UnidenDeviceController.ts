@@ -14,6 +14,7 @@ export class UnidenDeviceController extends EventEmitter {
   private readonly connection: SerialPort;
 
   private currentOutput: string;
+  private currentOutputCallback?: () => any;
 
   constructor(portInfo: PortInfo) {
     super();
@@ -31,6 +32,9 @@ export class UnidenDeviceController extends EventEmitter {
   }
 
   public listen(): void {
+    this.on(InternalEvent.DataTerminator, () => {
+      if (this.currentOutputCallback !== undefined) this.currentOutputCallback();
+    });
     this.connection.on("data", (data: Buffer) => {
       const response = data.toString();
       this.currentOutput += response;
@@ -38,6 +42,7 @@ export class UnidenDeviceController extends EventEmitter {
         this.emit(InternalEvent.DataTerminator);
       }
     });
+
   }
 
   public async issueCommand<R extends UnidenResponse>(command: UnidenCommand): Promise<R> {
@@ -46,18 +51,26 @@ export class UnidenDeviceController extends EventEmitter {
 
       this.connection.write(command.toString(), error => { if (error) reject(error) });
 
-      this.once(InternalEvent.DataTerminator, () => {
-        console.log("called");
+      this.currentOutputCallback = () => {
         const response = this.currentOutput;
+
         this.currentOutput = "";
-        resolve(UnidenResponseParser.parse(response) as R);
-      });
+        this.currentOutputCallback = undefined;
+
+        try {
+          resolve(UnidenResponseParser.parse(response) as R);
+        }
+        catch (e) {
+          reject(e);
+        }
+      };
 
     }));
   }
 
   public async disconnect(): Promise<void> {
     return new Promise<void>((resolve, reject) => {
+      this.removeAllListeners(InternalEvent.DataTerminator);
       this.connection.on("close", () => resolve());
       this.connection.close(error => reject(error));
     });
