@@ -139,6 +139,9 @@ export class WhistlerDevice {
 
     public getActiveChannelInformation() {
         this.writeMessage([0x61]);
+        let message = this.readMessage();
+        console.log(message);
+
     }
 
     public getPowerStatus() {
@@ -160,6 +163,7 @@ export class WhistlerDevice {
     public setCCDumpOff() {
         this.setCCDump(0);
     }
+
 
     public readCCDump() {
         var message = this.readMessage().toString();
