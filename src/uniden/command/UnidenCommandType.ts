@@ -11,7 +11,7 @@ export enum UnidenCommandType {
   // SystemQuickKeyStatus = "SQK",
   // DepartmentQuickKeyStatus = "DQK",
   // PushScannerInfo = "PSI",
-  GetScannerInfo = "GSI",
+  // GetScannerInfo = "GSI",
   // GetAny = "GLT",
   // Hold = "HLD",
   // SetAvoid = "AVD",
@@ -29,6 +29,10 @@ export enum UnidenCommandType {
   EnterProgramMode = "PRG",
   ExitProgramMode = "ERG",
   CreateSystem = "CSY",
+<<<<<<< HEAD
   GetSystemInfo = "SIN",
   SetSystemInfo = "SIN",
+=======
+  GetSetSystemInfo = "SIN",
+>>>>>>> d0beb1dc79b0589336bca5e2713d2d0d1693dc84
 }

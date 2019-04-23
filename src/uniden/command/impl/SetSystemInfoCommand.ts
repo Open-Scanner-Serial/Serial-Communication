@@ -43,7 +43,11 @@ export enum OffOn {
   ON = 1
 }
 
+<<<<<<< HEAD
 export class SetSystemInfoCommand extends UnidenCommand {
+=======
+export class GetSetSystemInfo extends UnidenCommand {
+>>>>>>> d0beb1dc79b0589336bca5e2713d2d0d1693dc84
 
   private readonly systemInfo: SystemInformation;
 

@@ -6,6 +6,7 @@ export enum SetSystemInfoReponseStatus {
 }
 
 
+<<<<<<< HEAD
 export class SetSystemInfoResponse extends UnidenResponse {
 
   public isValid(): boolean {
@@ -13,5 +14,16 @@ export class SetSystemInfoResponse extends UnidenResponse {
   }
 
 
+=======
+export class SetSystemInfoResponseResponse extends UnidenResponse {
+
+  public isValid(): boolean {
+    return false;
+  }
+
+  public get success(): boolean {
+    return false;
+  }
+>>>>>>> d0beb1dc79b0589336bca5e2713d2d0d1693dc84
 
 }
