@@ -34,9 +34,16 @@ export class WhistlerDevice {
 
     private port: SerialPort;
 
-    constructor(_port: string, _baudrate: number, debug: boolean) {
+    private currentOutput?: any;
+    private currentOutputCallback?: () => any;
+
+    constructor(_port: string, _baudrate: number) {
             this.port = new SerialPort(_port, {
-                baudRate: _baudrate
+                baudRate: _baudrate, autoOpen: true
+            });
+            this.port.on("data", (data:any) => {
+              this.currentOutput = data;
+              if (this.currentOutputCallback) this.currentOutputCallback();
             });
     }
 
@@ -67,11 +74,21 @@ export class WhistlerDevice {
     }
 
     private async readMessage() {
-        await this.port.on('readable', () => {
-            return this.port.read();
-        });
+      return new Promise<any>(((resolve, reject) => {
+        try {
+          this.currentOutputCallback = () => {
+            const output = this.currentOutput;
+            this.currentOutputCallback = undefined;
+            this.currentOutput = undefined;
+            resolve(output);
+          };
+          this.port.read();
+        }
+        catch (e) {
+          reject(e);
+        }
+      }));
     }
-
 
 
     /**public charToByte(command: string[]) {
@@ -140,7 +157,6 @@ export class WhistlerDevice {
     public getActiveChannelInformation() {
         this.writeMessage([0x61]);
         let message = this.readMessage();
-        console.log(message);
 
     }
 
@@ -172,7 +188,10 @@ export class WhistlerDevice {
 
 }
 
-var device = new WhistlerDevice('COM7', 15200, true);
-
+(async () => {
+  var device = new WhistlerDevice('COM7', 15200);
+  const response = await device.getLCD();
+  console.log(response);
+})();
 
 
