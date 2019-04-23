@@ -8,7 +8,7 @@ export enum EnterProgramModeResponseStatus {
 export class EnterProgramModeResponse extends UnidenResponse {
 
   public isValid(): boolean {
-    return false;
+    return true;
   }
 
   public get success(): boolean {

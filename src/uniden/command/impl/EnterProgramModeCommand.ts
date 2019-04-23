@@ -8,7 +8,7 @@ export class EnterProgramModeCommand extends UnidenCommand {
   }
 
   protected getPayloadString(): string | null {
-    return null;
+    return "";
   }
 
 }
