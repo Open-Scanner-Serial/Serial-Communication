@@ -15,14 +15,14 @@ def main():
     port = serial.Serial(port=ports[input_port].device, baudrate=15200, timeout=0.5)
 
     buffer = bytearray()
-    buffer.append(0x02)
+    buffer.append(0x02) # start character
 
     command = bytearray()
-    command.append(0x50)
-    command.append(0x03)
-    command.append(sum(command))
+    command.append(0x50) # test command to get power status 
+    command.append(0x03) # end character
+    command.append(sum(command)) # add the checksum
 
-    buffer += command
+    buffer += command # add the command to the buffer
 
     port.write(buffer)
 
